@@ -7,8 +7,10 @@ using UnityEngine.InputSystem;
 public class PLayerController : MonoBehaviour
 {
     public float walkSpeed = 5f;
+    public float jumpforce = 5f;
     Vector2 moveInput;
     public bool IsMoving{get; private set;}
+    public bool isGrounded;
 
     Rigidbody2D rb;
     private void Awake()
@@ -28,13 +30,36 @@ public class PLayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
+
         rb.velocity = new Vector2(moveInput.x*walkSpeed, rb.velocity.y);
+        
+        if(moveInput.y > 0 && isGrounded)
+        {
+            rb.AddForce(Vector2.up *jumpforce, ForceMode2D.Impulse);
+            isGrounded = false;
+        }
     }
-//
+
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
 
         IsMoving = moveInput != Vector2.zero;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag ("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
     }
 }

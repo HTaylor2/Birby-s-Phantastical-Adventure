@@ -18,7 +18,7 @@ public class TouchingDirections : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+        //Istouching
     }
 
     // Update is called once per frame
