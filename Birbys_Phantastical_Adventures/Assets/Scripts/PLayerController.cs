@@ -13,6 +13,8 @@ public class PLayerController : MonoBehaviour
     public bool isGrounded;
 
     Rigidbody2D rb;
+    public float fallGravityScale = 5;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -38,6 +40,15 @@ public class PLayerController : MonoBehaviour
             rb.AddForce(Vector2.up *jumpforce, ForceMode2D.Impulse);
             isGrounded = false;
         }
+
+        if(rb.velocity.y > 0){
+            rb.gravityScale = rb.gravityScale;
+        }
+        else
+        {
+            rb.gravityScale = fallGravityScale;
+        }
+
     }
 
     public void OnMove(InputAction.CallbackContext context)
