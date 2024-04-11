@@ -128,8 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 539112abf51416d46884e06ca7d11ede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 5
-  jumpforce: 20
+  walkSpeed: 15
+  jumpforce: 30
   isGrounded: 0
   fallGravityScale: 5
 --- !u!114 &5026049554427677078
