@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+//using System.Numerics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,7 @@ public class PLayerController : MonoBehaviour
     Vector2 moveInput;
     public bool IsMoving{get; private set;}
     public bool isGrounded;
+    public bool isFacingRight = true;
 
     Rigidbody2D rb;
     public float fallGravityScale = 5;
@@ -56,6 +58,8 @@ public class PLayerController : MonoBehaviour
         moveInput = context.ReadValue<Vector2>();
 
         IsMoving = moveInput != Vector2.zero;
+
+        SetFacingDirection(moveInput);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -73,4 +77,25 @@ public class PLayerController : MonoBehaviour
             isGrounded = false;
         }
     }
+
+    public bool IsFacingRight { get { return isFacingRight;}
+    private set{
+        if(isFacingRight != value){
+            transform.localScale *= new Vector2(-1,1);
+        }
+        isFacingRight = value;
+    }
+    }
+
+    public void SetFacingDirection(Vector2 moveInput){
+        
+        if(moveInput.x > 0 && !isFacingRight){
+            IsFacingRight = true;
+        }
+        else if(moveInput.x < 0 && isFacingRight){
+            IsFacingRight = false;
+        }
+    }
+
 }
+
