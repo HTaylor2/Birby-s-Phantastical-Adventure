@@ -5,29 +5,42 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {   
-    [SerializeField] private int _maxHealth =100;
-    private int _minHealth;
-    private int _currentHealth;
+    public GameObject[] hearts;
+    [SerializeField] private int _maxHealth =4;
+    
+    public int _currentHealth;
 
     //public properties as getters taht we can use in other scripts
-    public int MaxHealth => _maxHealth;
-    public int CurrentHealth => _currentHealth;
+
     // Start is called before the first frame update
     void Start()
     {
         _currentHealth = _maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void Damage(int damageAmount){
         _currentHealth -= damageAmount;
         if (_currentHealth < 1){
+            Destroy(hearts[0].gameObject);
+        }else if (_currentHealth<2){    
+            Destroy(hearts[1].gameObject);
+        }else if (_currentHealth<3){    
+            Destroy(hearts[2].gameObject);
+        }else if (_currentHealth<4){    
+            Destroy(hearts[3].gameObject);
+        }
+        if (_currentHealth <= 0){
             Destroy(gameObject);
+        }
+    }
+
+    public void Heal(int health){
+        _currentHealth += health;
+        if (_currentHealth >= _maxHealth){
+            _currentHealth=_maxHealth;
+        }else{
+            
         }
     }
 }
