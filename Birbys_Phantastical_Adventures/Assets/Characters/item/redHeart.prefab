@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
-  playerHealth: {fileID: 0}
+  playerHealth: {fileID: 6930543809085297350, guid: 1cb6c8136471e0e4692f30fdd0dbb02d, type: 3}
 --- !u!70 &4456175353528544656
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
