@@ -1,25 +1,31 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 //using System.Numerics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))]
 public class PLayerController : MonoBehaviour
 {
     public float walkSpeed = 5f;
     public float jumpforce = 5f;
     Vector2 moveInput;
     public bool IsMoving{get; private set;}
-    public bool isGrounded;
     public bool isFacingRight = true;
+
+    TouchingDirections touchingDirection;
 
     Rigidbody2D rb;
     public float fallGravityScale = 5;
+    [SerializeField]
+    private bool _isGrounded;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        touchingDirection = GetComponent<TouchingDirections>();
+
     }
     // Start is called before the first frame update
     void Start()
@@ -37,11 +43,6 @@ public class PLayerController : MonoBehaviour
 
         rb.velocity = new Vector2(moveInput.x*walkSpeed, rb.velocity.y);
         
-        if(moveInput.y > 0 && isGrounded)
-        {
-            rb.AddForce(Vector2.up *jumpforce, ForceMode2D.Impulse);
-            isGrounded = false;
-        }
 
         if(rb.velocity.y > 0){
             rb.gravityScale = rb.gravityScale;
@@ -61,22 +62,7 @@ public class PLayerController : MonoBehaviour
 
         SetFacingDirection(moveInput);
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag ("Ground"))
-        {
-            isGrounded = true;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = false;
-        }
-    }
+ 
 
     public bool IsFacingRight { get { return isFacingRight;}
     private set{
@@ -97,5 +83,31 @@ public class PLayerController : MonoBehaviour
         }
     }
 
+
+    public float CurrentMoveSpeed{
+        get{
+            if(IsMoving && !touchingDirection.IsOnWall){
+                return walkSpeed;
+            }
+            else{
+                return 0;
+            }
+        }
+    }
+
+
+    public void onJump(InputAction.CallbackContext context){
+        if(context.started && touchingDirection.IsGrounded)
+        {
+            rb.AddForce(Vector2.up *jumpforce, ForceMode2D.Impulse);
+            
+        }
+    }
+
+    public bool IsGrounded{get{
+        return _isGrounded;
+    }private set{
+        _isGrounded = value;
+    }}
 }
 

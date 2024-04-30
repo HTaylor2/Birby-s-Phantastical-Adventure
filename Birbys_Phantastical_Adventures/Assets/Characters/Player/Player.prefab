@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5026049554427677078}
   - component: {fileID: 3676412294347610219}
   - component: {fileID: 5736993188776557864}
+  - component: {fileID: 6930543809085297350}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -105,7 +106,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: aa0dec93af42d7f41ad6adc41aea2947, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -131,6 +132,7 @@ MonoBehaviour:
   walkSpeed: 15
   jumpforce: 30
   isGrounded: 0
+  isFacingRight: 1
   fallGravityScale: 5
 --- !u!114 &5026049554427677078
 MonoBehaviour:
@@ -273,3 +275,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3457f5a9c875c544b86294c1a23fa14f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6930543809085297350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401667014833025933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b81c9fd64b3274b47974fe3bc20c8eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
