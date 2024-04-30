@@ -11,6 +11,7 @@ public class healthPickup : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision){
         if(collision.gameObject.tag == "Player"){
             playerHealth.Heal(health);
+            Destroy(gameObject);
         }
     }
 }

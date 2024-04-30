@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {   
-    public GameObject[] hearts;
+    [SerializeField] private GameObject[] hearts;
+    private int heartHealth;
     [SerializeField] private int _maxHealth =4;
     
     public int _currentHealth;
@@ -21,17 +22,14 @@ public class Health : MonoBehaviour
 
     public void Damage(int damageAmount){
         _currentHealth -= damageAmount;
-        if (_currentHealth < 1){
-            Destroy(hearts[0].gameObject);
-        }else if (_currentHealth<2){    
-            Destroy(hearts[1].gameObject);
-        }else if (_currentHealth<3){    
-            Destroy(hearts[2].gameObject);
-        }else if (_currentHealth<4){    
-            Destroy(hearts[3].gameObject);
-        }
         if (_currentHealth <= 0){
+            hearts[0].gameObject.SetActive(false);
             Destroy(gameObject);
+        }
+        else{
+            for(int i = _maxHealth-1; i >=_currentHealth; i--){
+                hearts[i].gameObject.SetActive(false);
+            }
         }
     }
 
@@ -39,8 +37,9 @@ public class Health : MonoBehaviour
         _currentHealth += health;
         if (_currentHealth >= _maxHealth){
             _currentHealth=_maxHealth;
-        }else{
-            
         }
+        for(int i = 0; i<_currentHealth; i++){
+                hearts[i].gameObject.SetActive(true);
+            }
     }
 }
