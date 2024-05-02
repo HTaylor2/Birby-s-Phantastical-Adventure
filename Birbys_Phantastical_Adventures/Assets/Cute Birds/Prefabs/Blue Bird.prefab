@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 21231092}
   - component: {fileID: 2820254069733020344}
   - component: {fileID: 6501994002710577659}
+  - component: {fileID: 7947341085359654527}
+  - component: {fileID: 6519998229793148016}
   m_Layer: 0
   m_Name: Blue Bird
   m_TagString: Boss
@@ -109,10 +111,10 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!114 &6501994002710577659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,3 +130,63 @@ MonoBehaviour:
   damage: 1
   playerHealth: {fileID: 6930543809085297350, guid: 1cb6c8136471e0e4692f30fdd0dbb02d, type: 3}
   _maxHealth: 20
+--- !u!61 &7947341085359654527
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146898}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.026202202, y: 0.8188734}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 13.49, y: 13.71}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 8.275606, y: 9.176655}
+  m_EdgeRadius: 0
+--- !u!114 &6519998229793148016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f27d01149c44a49ae3d500ebe6c8f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointA: {fileID: 569192395733220738, guid: 116e262db242f1b498a47c6d57c653f8, type: 3}
+  pointB: {fileID: 6883781061578303618, guid: 824086bb205e98b478ecc324dcbbe6c3, type: 3}
+  speed: 12
