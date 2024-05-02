@@ -21,16 +21,21 @@ public class PLayerController : MonoBehaviour
     [SerializeField]
     private bool _isGrounded;
 
+    public Health playerHealth;
+    private bool firstTime=true;
+    private bool isFalling = false;
+    private Vector3 previousPosition;
+    private float highestPosition;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         touchingDirection = GetComponent<TouchingDirections>();
-
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        previousPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -52,6 +57,20 @@ public class PLayerController : MonoBehaviour
             rb.gravityScale = fallGravityScale;
         }
 
+        if(IsGrounded){
+            if(transform.position.y < previousPosition.y && firstTime){
+                firstTime = false;
+                isFalling = true;
+                highestPosition = transform.position.y;
+            }
+            previousPosition = transform.position;
+            if(IsGrounded && isFalling){
+                if(highestPosition - transform.position.y>10){
+                    playerHealth.Damage(-2);
+                }
+            }
+        }
+
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -67,7 +86,7 @@ public class PLayerController : MonoBehaviour
     public bool IsFacingRight { get { return isFacingRight;}
     private set{
         if(isFacingRight != value){
-            transform.localScale *= new Vector2(-1,1);
+            transform.Rotate(0,180,0);
         }
         isFacingRight = value;
     }
@@ -109,5 +128,6 @@ public class PLayerController : MonoBehaviour
     }private set{
         _isGrounded = value;
     }}
+
 }
 

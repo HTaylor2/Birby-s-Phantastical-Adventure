@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1277022611132240349
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7764214098074297953}
+  m_Layer: 0
+  m_Name: ShootingPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7764214098074297953
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277022611132240349}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 21.9, y: -4.2, z: 0}
+  m_LocalScale: {x: 10.474761, y: 11.959144, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9127521392374747859}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1401667014833025933
 GameObject:
   m_ObjectHideFlags: 0
@@ -16,6 +47,7 @@ GameObject:
   - component: {fileID: 3676412294347610219}
   - component: {fileID: 5736993188776557864}
   - component: {fileID: 6930543809085297350}
+  - component: {fileID: 2058852748138884940}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -35,7 +67,8 @@ Transform:
   m_LocalPosition: {x: -7.66, y: 3.89, z: 0.011113546}
   m_LocalScale: {x: 0.04753888, y: 0.043603286, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7764214098074297953}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5656041822337237771
@@ -129,11 +162,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 539112abf51416d46884e06ca7d11ede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 15
+  walkSpeed: 18
   jumpforce: 30
   isFacingRight: 1
   fallGravityScale: 5
   _isGrounded: 0
+  playerHealth: {fileID: 6930543809085297350}
 --- !u!114 &5026049554427677078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +214,19 @@ MonoBehaviour:
     m_ActionId: 10662cf5-165a-4a77-8d92-9cd882c151b0
     m_ActionName: Player/Look[/Mouse/delta,/Touchscreen/delta]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8511406041040928633}
+        m_TargetAssemblyTypeName: PLayerController, Assembly-CSharp
+        m_MethodName: onAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 8fc08dbf-9f5f-4f67-8b49-eb9a8ed34b79
     m_ActionName: Player/Fire[/Mouse/leftButton,/Touchscreen/primaryTouch/tap]
   - m_PersistentCalls:
@@ -224,9 +270,25 @@ MonoBehaviour:
     m_ActionId: 5f6ea11b-5922-4150-bae7-e3ab409ef305
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8511406041040928633}
+        m_TargetAssemblyTypeName: PLayerController, Assembly-CSharp
+        m_MethodName: onJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: db8de3ef-a5f9-4937-84cf-9ea67d562175
     m_ActionName: Player/Jump[/Keyboard/upArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 497dacb7-8cef-44a1-ae8b-d9567527d818
+    m_ActionName: Player/Shoot[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -312,3 +374,17 @@ MonoBehaviour:
   hearts: []
   _maxHealth: 4
   _currentHealth: 0
+--- !u!114 &2058852748138884940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401667014833025933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0907f850dcaf134409e399b8d99ca1ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootingPoint: {fileID: 7764214098074297953}
+  bulletPrefab: {fileID: 783059011857036721, guid: eb4d2a9b6b327f644ae002bd99baf870, type: 3}
